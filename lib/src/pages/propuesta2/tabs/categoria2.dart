@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/categoria_model.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta2/detalle_categoria.dart';
@@ -22,11 +23,10 @@ class Categoria2 extends StatelessWidget {
         elevation: 0,
         title: Text(
           'Categorías',
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'Aeonik-Medium',
-            fontWeight: FontWeight.w600,
-            fontSize: 25,
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            color: Colors.grey[700],
+            fontSize: 19,
           ),
         ),
         bottom: PreferredSize(
@@ -120,7 +120,8 @@ class Categoria2 extends StatelessWidget {
                                       child: SvgPicture.network(
                                         '${snapshot.data[i].categoriaIcono}',
                                         semanticsLabel: 'A shark?!',
-                                        placeholderBuilder: (BuildContext context) => Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
+                                        placeholderBuilder: (BuildContext context) =>
+                                            Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
                                         fit: BoxFit.cover,
                                       ),
                                     ),

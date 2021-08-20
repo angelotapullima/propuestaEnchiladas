@@ -36,7 +36,7 @@ class _Home1State extends State<Home1> {
 
     final buttonBloc = ProviderBloc.bottom(context);
 
-    buttonBloc.changePage(3);
+    buttonBloc.changePage(2);
 
     return Scaffold(
       body: StreamBuilder(

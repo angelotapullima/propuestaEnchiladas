@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: GridView.builder(
-            itemCount: 5,
+            itemCount: 2,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 1,
               crossAxisCount: 2,
@@ -36,7 +36,10 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(
-                    child: Text('Propuesta (${index + 1})',style: TextStyle(color: Colors.white),),
+                    child: Text(
+                      'Propuesta (${index + 1})',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               );
