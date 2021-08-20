@@ -4,10 +4,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:propuesta_enchiladas/src/api/configuracion_api.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/categoria_model.dart';
 import 'package:propuesta_enchiladas/src/models/pantalla_model.dart';
+import 'package:propuesta_enchiladas/src/pages/propuesta2/detalle_categoria.dart';
+import 'package:propuesta_enchiladas/src/pages/propuesta2/tabs/categoria2.dart';
 import 'package:propuesta_enchiladas/src/utils/circle.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
 import 'package:propuesta_enchiladas/src/utils/sliver_header_delegate.dart';
@@ -175,19 +178,14 @@ class _Principal2State extends State<Principal2> {
                                                         children: List.generate(
                                                           cat.data.length,
                                                           (index) => Container(
-                                                            width: (_currentPageNotifier.value >= index - 0.5 &&
-                                                                    _currentPageNotifier.value < index + 0.5)
-                                                                ? 10
-                                                                : 5,
+                                                            width: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5) ? 10 : 5,
                                                             height: 5,
                                                             margin: EdgeInsets.symmetric(horizontal: 5),
                                                             decoration: BoxDecoration(
-                                                              borderRadius: (_currentPageNotifier.value >= index - 0.5 &&
-                                                                      _currentPageNotifier.value < index + 0.5)
+                                                              borderRadius: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5)
                                                                   ? BorderRadius.circular(8)
                                                                   : BorderRadius.circular(10),
-                                                              color: (_currentPageNotifier.value >= index - 0.5 &&
-                                                                      _currentPageNotifier.value < index + 0.5)
+                                                              color: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5)
                                                                   ? Colors.green
                                                                   : Colors.grey,
                                                               /*    shape: (_currentPageNotifier.value >= index - 0.5 &&
@@ -236,81 +234,130 @@ class _Principal2State extends State<Principal2> {
                                                 scrollDirection: Axis.horizontal,
                                                 itemBuilder: (context, index) {
                                                   if (index == 0) {
-                                                    return Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: [
-                                                        Container(
-                                                          margin: EdgeInsets.symmetric(
-                                                            horizontal: responsive.wp(4),
-                                                          ),
-                                                          height: responsive.hp(6),
-                                                          width: responsive.hp(6),
-                                                          decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(100),
-                                                            color: Colors.red,
-                                                          ),
-                                                          child: Center(
-                                                            child: Icon(
-                                                              Ionicons.ios_alert,
-                                                              color: Colors.white,
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        Navigator.of(context).push(PageRouteBuilder(
+                                                          pageBuilder: (context, animation, secondaryAnimation) {
+                                                            return Categoria2();
+                                                          },
+                                                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                            var begin = Offset(0.0, 1.0);
+                                                            var end = Offset.zero;
+                                                            var curve = Curves.ease;
+
+                                                            var tween = Tween(begin: begin, end: end).chain(
+                                                              CurveTween(curve: curve),
+                                                            );
+
+                                                            return SlideTransition(
+                                                              position: animation.drive(tween),
+                                                              child: child,
+                                                            );
+                                                          },
+                                                        ));
+                                                      },
+                                                      child: Container(
+                                                      width: responsive.hp(9),
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                          children: [
+                                                            Container(
+                                                              margin: EdgeInsets.symmetric(
+                                                                horizontal: responsive.wp(4),
+                                                              ),
+                                                              height: responsive.hp(5.5),
+                                                              width: responsive.hp(5.8),
+                                                              decoration: BoxDecoration(
+                                                                borderRadius: BorderRadius.circular(100),
+                                                                color: Colors.red,
+                                                              ),
+                                                              child: Center(
+                                                                child: Icon(
+                                                                  Ionicons.ios_alert,
+                                                                  color: Colors.white,
+                                                                ),
+                                                              ),
                                                             ),
-                                                          ),
+                                                            SizedBox(
+                                                              height: responsive.hp(.5),
+                                                            ),
+                                                            Text(
+                                                              'Categorías',
+                                                              style: TextStyle(
+                                                                fontSize: responsive.ip(1.2),
+                                                                fontWeight: FontWeight.w600,
+                                                                color: Colors.grey,
+                                                              ),
+                                                            )
+                                                          ],
                                                         ),
-                                                        SizedBox(
-                                                          height: responsive.hp(.5),
-                                                        ),
-                                                        Text(
-                                                          'Categorias',
-                                                          style: TextStyle(
-                                                            fontSize: responsive.ip(1.2),
-                                                            fontWeight: FontWeight.w600,
-                                                            color: Colors.grey,
-                                                          ),
-                                                        )
-                                                      ],
+                                                      ),
                                                     );
                                                   }
                                                   index = index - 1;
 
-                                                  return Container(
-                                                          width: responsive.hp(9),
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: [
-                                                        Container(
-                                                          margin: EdgeInsets.symmetric(
-                                                            horizontal: responsive.wp(2),
-                                                          ),
-                                                          height: responsive.hp(6),
-                                                          width: responsive.hp(6),
-                                                          decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(100),
-                                                            color: Colors.red,
-                                                          ),
-                                                          child: Center(
-                                                            child: Icon(
-                                                              Ionicons.ios_american_football,
-                                                              color: Colors.white,
-                                                            ),
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      Navigator.of(context).push(PageRouteBuilder(
+                                                        pageBuilder: (context, animation, secondaryAnimation) {
+                                                          return Detallecategoria(
+                                                            idCategoria: '${snapshot.data[index].idCategoria}',
+                                                            categoriaNombre: '${snapshot.data[index].categoriaNombre}',
+                                                          );
+                                                        },
+                                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                          var begin = Offset(0.0, 1.0);
+                                                          var end = Offset.zero;
+                                                          var curve = Curves.ease;
+
+                                                          var tween = Tween(begin: begin, end: end).chain(
+                                                            CurveTween(curve: curve),
+                                                          );
+
+                                                          return SlideTransition(
+                                                            position: animation.drive(tween),
+                                                            child: child,
+                                                          );
+                                                        },
+                                                      ));
+                                                    },
+                                                    child: Container(
+                                                      width: responsive.hp(9),
+                                                      child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        children: [
+                                                          Container(
+                                                          height: responsive.ip(5),
+                                                          width: responsive.ip(5),
+                                                          child: SvgPicture.network(
+                                                            '${snapshot.data[index].categoriaIcono}',
+                                                            semanticsLabel: 'A shark?!',
+                                                            //color:Colors.black,
+                                                            placeholderBuilder: (BuildContext context) =>
+                                                                Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
+                                                            fit: BoxFit.cover,
                                                           ),
                                                         ),
-                                                        SizedBox(
-                                                          height: responsive.hp(.5),
-                                                        ),
-                                                        Padding(
-                                                          padding:  EdgeInsets.symmetric( horizontal: responsive.wp(1),),
-                                                          child: Text(
-                                                            '${snapshot.data[index].categoriaNombre.toLowerCase()}',
-                                                            maxLines: 2,
-                                                            textAlign: TextAlign.center,
-                                                            style: TextStyle(
-                                                              fontSize: responsive.ip(1.2),
-                                                              fontWeight: FontWeight.w600,
-                                                              color: Colors.grey,
-                                                            ),
+                                                          SizedBox(
+                                                            height: responsive.hp(.5),
                                                           ),
-                                                        )
-                                                      ],
+                                                          Padding(
+                                                            padding: EdgeInsets.symmetric(
+                                                              horizontal: responsive.wp(1),
+                                                            ),
+                                                            child: Text(
+                                                              '${snapshot.data[index].categoriaNombre.toLowerCase()}',
+                                                              maxLines: 2,
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                fontSize: responsive.ip(1.2),
+                                                                fontWeight: FontWeight.w600,
+                                                                color: Colors.grey,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   );
                                                 },
@@ -485,9 +532,7 @@ class _Principal2State extends State<Principal2> {
                                           ),
                                         ),
                                         Center(
-                                          child: (downloadProgress.progress != null)
-                                              ? Text('${(downloadProgress.progress * 100).toInt().toString()}%')
-                                              : Container(),
+                                          child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
                                         )
                                       ],
                                     ),

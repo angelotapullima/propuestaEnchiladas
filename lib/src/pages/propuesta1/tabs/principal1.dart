@@ -4,14 +4,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:propuesta_enchiladas/src/api/configuracion_api.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/categoria_model.dart';
 import 'package:propuesta_enchiladas/src/models/pantalla_model.dart';
-import 'package:propuesta_enchiladas/src/models/productos_model.dart';
 import 'package:propuesta_enchiladas/src/utils/circle.dart';
-import 'package:propuesta_enchiladas/src/utils/constant.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
 import 'package:propuesta_enchiladas/src/utils/sliver_header_delegate.dart';
 
@@ -74,7 +72,7 @@ class _Principal1State extends State<Principal1> {
                                         if (snapshot.hasData) {
                                           if (snapshot.data.length > 0) {
                                             return Container(
-                                              height: responsive.hp(4),
+                                              height: responsive.hp(6),
                                               child: ListView.builder(
                                                 itemCount: snapshot.data.length,
                                                 scrollDirection: Axis.horizontal,
@@ -84,21 +82,42 @@ class _Principal1State extends State<Principal1> {
                                                       borderRadius: BorderRadius.circular(15),
                                                       color: (index == 0) ? Color(0x4078ce74) : Colors.white,
                                                     ),
-                                                    margin: EdgeInsets.only(left: responsive.wp(1)),
+                                                    margin: EdgeInsets.only(
+                                                      left: responsive.wp(3),
+                                                      top: responsive.hp(.5),
+                                                      bottom: responsive.hp(.5),
+                                                    ),
                                                     padding: EdgeInsets.symmetric(
-                                                      horizontal: responsive.wp(3),
+                                                      horizontal: responsive.wp(1),
                                                       vertical: responsive.hp(.5),
                                                     ),
-                                                    child: Center(
-                                                      child: Text(
-                                                        '${snapshot.data[index].categoriaNombre.toLowerCase()}',
-                                                        style: TextStyle(
-                                                          color: (index == 0) ? Colors.green[500] : Color(0xffB0BED1),
-                                                          fontFamily: 'PulpDisplay-Medium',
-                                                          fontWeight: FontWeight.w500,
-                                                          fontSize: 14,
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          height: responsive.ip(3),
+                                                          width: responsive.ip(3),
+                                                          child: SvgPicture.network(
+                                                            '${snapshot.data[index].categoriaIcono}',
+                                                            semanticsLabel: 'A shark?!',
+                                                            //color:Colors.black,
+                                                            placeholderBuilder: (BuildContext context) =>
+                                                                Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                         ),
-                                                      ),
+                                                        SizedBox(
+                                                          width: responsive.wp(2),
+                                                        ),
+                                                        Text(
+                                                          '${snapshot.data[index].categoriaNombre.toLowerCase()}',
+                                                          style: TextStyle(
+                                                            color: (index == 0) ? Colors.green[500] : Color(0xffB0BED1),
+                                                            fontFamily: 'PulpDisplay-Medium',
+                                                            fontWeight: FontWeight.w500,
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   );
                                                 },
@@ -242,8 +261,7 @@ class _Principal1State extends State<Principal1> {
                                                             margin: EdgeInsets.symmetric(horizontal: 5),
                                                             decoration: BoxDecoration(
                                                               borderRadius: BorderRadius.circular(10),
-                                                              color: (_currentPageNotifier.value >= index - 0.5 &&
-                                                                      _currentPageNotifier.value < index + 0.5)
+                                                              color: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5)
                                                                   ? Colors.green
                                                                   : Colors.grey,
                                                             ),
@@ -571,9 +589,7 @@ class _Principal1State extends State<Principal1> {
                                               ),
                                             ),
                                             Center(
-                                              child: (downloadProgress.progress != null)
-                                                  ? Text('${(downloadProgress.progress * 100).toInt().toString()}%')
-                                                  : Container(),
+                                              child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
                                             )
                                           ],
                                         ),
@@ -718,9 +734,7 @@ class _Principal1State extends State<Principal1> {
                                                 ),
                                               ),
                                               Center(
-                                                child: (downloadProgress.progress != null)
-                                                    ? Text('${(downloadProgress.progress * 100).toInt().toString()}%')
-                                                    : Container(),
+                                                child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
                                               )
                                             ],
                                           ),

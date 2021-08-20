@@ -117,7 +117,7 @@ class _Home1State extends State<Home1> {
                             SalomonBottomBarItem(
                               icon: Icon(FontAwesome5Solid.box),
                               title: Text("Categorías"),
-                              selectedColor: Colors.orange,
+                              selectedColor: Colors.green,
                             ),
                             SalomonBottomBarItem(
                               icon: Icon(MaterialIcons.shopping_cart),
