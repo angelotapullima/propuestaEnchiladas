@@ -230,7 +230,7 @@ class _Principal2State extends State<Principal2> {
                                         if (snapshot.hasData) {
                                           if (snapshot.data.length > 0) {
                                             return Container(
-                                              height: responsive.hp(9),
+                                              height: responsive.hp(10),
                                               child: ListView.builder(
                                                 itemCount: snapshot.data.length + 1,
                                                 scrollDirection: Axis.horizontal,
@@ -241,7 +241,7 @@ class _Principal2State extends State<Principal2> {
                                                       children: [
                                                         Container(
                                                           margin: EdgeInsets.symmetric(
-                                                            horizontal: responsive.wp(3),
+                                                            horizontal: responsive.wp(4),
                                                           ),
                                                           height: responsive.hp(6),
                                                           width: responsive.hp(6),
@@ -272,38 +272,46 @@ class _Principal2State extends State<Principal2> {
                                                   }
                                                   index = index - 1;
 
-                                                  return Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: [
-                                                      Container(
-                                                        margin: EdgeInsets.symmetric(
-                                                          horizontal: responsive.wp(3),
-                                                        ),
-                                                        height: responsive.hp(6),
-                                                        width: responsive.hp(6),
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(100),
-                                                          color: Colors.red,
-                                                        ),
-                                                        child: Center(
-                                                          child: Icon(
-                                                            Ionicons.ios_american_football,
-                                                            color: Colors.white,
+                                                  return Container(
+                                                          width: responsive.hp(9),
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        Container(
+                                                          margin: EdgeInsets.symmetric(
+                                                            horizontal: responsive.wp(2),
+                                                          ),
+                                                          height: responsive.hp(6),
+                                                          width: responsive.hp(6),
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(100),
+                                                            color: Colors.red,
+                                                          ),
+                                                          child: Center(
+                                                            child: Icon(
+                                                              Ionicons.ios_american_football,
+                                                              color: Colors.white,
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: responsive.hp(.5),
-                                                      ),
-                                                      Text(
-                                                        '${snapshot.data[index].categoriaNombre.toLowerCase()}',
-                                                        style: TextStyle(
-                                                          fontSize: responsive.ip(1.2),
-                                                          fontWeight: FontWeight.w600,
-                                                          color: Colors.grey,
+                                                        SizedBox(
+                                                          height: responsive.hp(.5),
                                                         ),
-                                                      )
-                                                    ],
+                                                        Padding(
+                                                          padding:  EdgeInsets.symmetric( horizontal: responsive.wp(1),),
+                                                          child: Text(
+                                                            '${snapshot.data[index].categoriaNombre.toLowerCase()}',
+                                                            maxLines: 2,
+                                                            textAlign: TextAlign.center,
+                                                            style: TextStyle(
+                                                              fontSize: responsive.ip(1.2),
+                                                              fontWeight: FontWeight.w600,
+                                                              color: Colors.grey,
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
                                                   );
                                                 },
                                               ),
@@ -427,7 +435,7 @@ class _Principal2State extends State<Principal2> {
           return GridView.builder(
             padding: EdgeInsets.zero,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 1,
+              childAspectRatio: .9,
               crossAxisCount: 2,
               mainAxisSpacing: responsive.hp(1),
             ),
@@ -443,7 +451,7 @@ class _Principal2State extends State<Principal2> {
                     color: Colors.white,
                   ),
                   width: responsive.ip(anchoCard),
-                  height: responsive.ip(altoCard),
+                  //height: (tipo=='puzzle')?responsive.hp(20):responsive.ip(altoCard),
                   margin: EdgeInsets.only(
                     right: responsive.wp(1.5),
                     left: responsive.wp(1.5),
@@ -456,7 +464,7 @@ class _Principal2State extends State<Principal2> {
                           Container(
                             width: double.infinity,
                             height: (tipo == 'puzzle')
-                                ? responsive.ip(altoCard) - responsive.ip(5)
+                                ? responsive.hp(25)
                                 : (tipo == 'producto')
                                     ? responsive.ip(altoCard) - responsive.ip(15)
                                     : responsive.ip(altoCard) - responsive.ip(0),
@@ -724,7 +732,7 @@ class _CustomHeaderPrincipal1State extends State<CustomHeaderPrincipal1> {
                       ),
                       Expanded(
                         child: Text(
-                          'Búscar productos varios',
+                          '¿Qué está buscando?',
                           style: TextStyle(color: Colors.grey),
                         ),
                       )
