@@ -537,7 +537,7 @@ class CategoriasApi {
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
 
-      utils.showToast("Problemas con la conexión a internet", 2, ToastGravity.TOP);
+      //utils.showToast("Problemas con la conexión a internet", 2, ToastGravity.TOP);
       return false;
     }
   }

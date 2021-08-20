@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:propuesta_enchiladas/src/database/pantalla_database.dart';
 import 'package:propuesta_enchiladas/src/database/producto_database.dart';
@@ -9,7 +8,6 @@ import 'package:propuesta_enchiladas/src/models/pantalla_model.dart';
 import 'package:propuesta_enchiladas/src/models/productos_model.dart';
 import 'package:propuesta_enchiladas/src/models/puzzle_model.dart';
 import 'package:propuesta_enchiladas/src/utils/preferencias_usuario.dart';
-import 'package:propuesta_enchiladas/src/utils/utilidades.dart';
 
 class ConfiguracionApi {
   final String _url = 'https://delivery.lacasadelasenchiladas.pe';
@@ -152,7 +150,7 @@ class ConfiguracionApi {
       }
     } catch (error) {
       //print("Exception occured: $error stackTrace: $stacktrace");
-      showToast("Problemas con la conexión a internet", 2, ToastGravity.TOP);
+      //showToast("Problemas con la conexión a internet", 2, ToastGravity.TOP);
       return false;
     }
   }

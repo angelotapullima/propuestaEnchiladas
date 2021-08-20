@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta1/tabs/carrito1.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta1/tabs/categoria1.dart';
@@ -35,7 +36,7 @@ class _Home1State extends State<Home1> {
 
     final buttonBloc = ProviderBloc.bottom(context);
 
-    buttonBloc.changePage(0);
+    buttonBloc.changePage(3);
 
     return Scaffold(
       body: StreamBuilder(
@@ -86,6 +87,7 @@ class _Home1State extends State<Home1> {
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         return SalomonBottomBar(
                           currentIndex: snapshot.data,
+                          unselectedItemColor: Colors.grey,
                           onTap: (i) {
                             buttonBloc.changePage(i);
                           },
@@ -120,7 +122,32 @@ class _Home1State extends State<Home1> {
                               selectedColor: Colors.green,
                             ),
                             SalomonBottomBarItem(
-                              icon: Icon(MaterialIcons.shopping_cart),
+                              icon: Stack(
+                                children: [
+                                  Icon(MaterialIcons.shopping_cart),
+                                  Positioned(
+                                    right: 0,
+                                    top: 0,
+                                    child: Container(
+                                      height: responsive.ip(1.4),
+                                      width: responsive.ip(1.4),
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(100),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '4',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 10,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                               title: Text("Carrito"),
                               selectedColor: Colors.orange,
                             ),
