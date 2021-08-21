@@ -294,7 +294,7 @@ class Carrito1 extends StatelessWidget {
                                 width: responsive.wp(3),
                               ),
                               Container(
-                                width: responsive.wp(15),
+                                width: responsive.wp(18),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.grey[300],
@@ -304,33 +304,34 @@ class Carrito1 extends StatelessWidget {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: [
+                                        SizedBox(width: responsive.wp(2)),
                                         Text(
                                           '-',
-                                          style: TextStyle(
+                                          style: GoogleFonts.poppins(
                                             color: Colors.black,
-                                            fontFamily: 'Aeonik',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w700,
                                           ),
                                         ),
+                                        SizedBox(width: responsive.wp(2)),
                                         Text(
                                           '1',
-                                          style: TextStyle(
+                                          style: GoogleFonts.poppins(
                                             color: Colors.black,
-                                            fontFamily: 'Aeonik',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
                                           ),
                                         ),
+                                        SizedBox(width: responsive.wp(2)),
                                         Text(
                                           '+',
-                                          style: TextStyle(
+                                          style: GoogleFonts.poppins(
                                             color: Colors.black,
-                                            fontFamily: 'Aeonik',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w700,
                                           ),
                                         ),
+                                        SizedBox(width: responsive.wp(2)),
                                       ],
                                     ),
                                   ),

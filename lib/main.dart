@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/pages/home_principal.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta1/home_1.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: 'splash',
         theme: ThemeData(
+          textTheme: GoogleFonts.poppinsTextTheme(),
           // This is the theme of your application.
           //
           // Try running your application with "flutter run". You'll see the

@@ -178,14 +178,19 @@ class _Principal2State extends State<Principal2> {
                                                         children: List.generate(
                                                           cat.data.length,
                                                           (index) => Container(
-                                                            width: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5) ? 10 : 5,
+                                                            width: (_currentPageNotifier.value >= index - 0.5 &&
+                                                                    _currentPageNotifier.value < index + 0.5)
+                                                                ? 10
+                                                                : 5,
                                                             height: 5,
                                                             margin: EdgeInsets.symmetric(horizontal: 5),
                                                             decoration: BoxDecoration(
-                                                              borderRadius: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5)
+                                                              borderRadius: (_currentPageNotifier.value >= index - 0.5 &&
+                                                                      _currentPageNotifier.value < index + 0.5)
                                                                   ? BorderRadius.circular(8)
                                                                   : BorderRadius.circular(10),
-                                                              color: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5)
+                                                              color: (_currentPageNotifier.value >= index - 0.5 &&
+                                                                      _currentPageNotifier.value < index + 0.5)
                                                                   ? Colors.green
                                                                   : Colors.grey,
                                                               /*    shape: (_currentPageNotifier.value >= index - 0.5 &&
@@ -228,7 +233,7 @@ class _Principal2State extends State<Principal2> {
                                         if (snapshot.hasData) {
                                           if (snapshot.data.length > 0) {
                                             return Container(
-                                              height: responsive.hp(10),
+                                              height: responsive.hp(11),
                                               child: ListView.builder(
                                                 itemCount: snapshot.data.length + 1,
                                                 scrollDirection: Axis.horizontal,
@@ -257,7 +262,7 @@ class _Principal2State extends State<Principal2> {
                                                         ));
                                                       },
                                                       child: Container(
-                                                      width: responsive.hp(9),
+                                                        width: responsive.hp(9),
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.center,
                                                           children: [
@@ -327,17 +332,17 @@ class _Principal2State extends State<Principal2> {
                                                         crossAxisAlignment: CrossAxisAlignment.center,
                                                         children: [
                                                           Container(
-                                                          height: responsive.ip(5),
-                                                          width: responsive.ip(5),
-                                                          child: SvgPicture.network(
-                                                            '${snapshot.data[index].categoriaIcono}',
-                                                            semanticsLabel: 'A shark?!',
-                                                            //color:Colors.black,
-                                                            placeholderBuilder: (BuildContext context) =>
-                                                                Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
-                                                            fit: BoxFit.cover,
+                                                            height: responsive.ip(5),
+                                                            width: responsive.ip(5),
+                                                            child: SvgPicture.network(
+                                                              '${snapshot.data[index].categoriaIcono}',
+                                                              semanticsLabel: 'A shark?!',
+                                                              //color:Colors.black,
+                                                              placeholderBuilder: (BuildContext context) => Container(
+                                                                  padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
+                                                              fit: BoxFit.cover,
+                                                            ),
                                                           ),
-                                                        ),
                                                           SizedBox(
                                                             height: responsive.hp(.5),
                                                           ),
@@ -532,7 +537,9 @@ class _Principal2State extends State<Principal2> {
                                           ),
                                         ),
                                         Center(
-                                          child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
+                                          child: (downloadProgress.progress != null)
+                                              ? Text('${(downloadProgress.progress * 100).toInt().toString()}%')
+                                              : Container(),
                                         )
                                       ],
                                     ),
