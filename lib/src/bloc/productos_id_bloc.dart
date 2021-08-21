@@ -194,7 +194,7 @@ class ProductosBloc {
   }
 
   void obtenerProductoPorQueryDelivery(String query) async {
-    final listGeneral = List<ProductosData>();
+    final List<ProductosData> listGeneral = [];
     final listProductos = await productoDatabase.consultarPorQueryDelivery('$query');
 
     for (var x = 0; x < listProductos.length; x++) {

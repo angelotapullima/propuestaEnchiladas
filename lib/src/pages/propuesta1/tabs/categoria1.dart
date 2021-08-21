@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/categoria_model.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta1/detalle_categoria.dart';
+import 'package:propuesta_enchiladas/src/pages/search.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
 
 class Categoria1 extends StatelessWidget {
@@ -34,37 +35,62 @@ class Categoria1 extends StatelessWidget {
           preferredSize: Size.fromHeight(50),
           child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: responsive.wp(4),
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: responsive.wp(4),
-                ),
-                height: responsive.hp(5),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      '¿Qué esta buscando?',
-                      style: TextStyle(
-                        color: Color(0xffB0BED1),
-                        fontFamily: 'PulpDisplay-Medium',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return SearchPage();
+                    },
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      var begin = Offset(0.0, 1.0);
+                      var end = Offset.zero;
+                      var curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end).chain(
+                        CurveTween(curve: curve),
+                      );
+
+                      return SlideTransition(
+                        position: animation.drive(tween),
+                        child: child,
+                      );
+                    },
+                  ));
+
+                  //SearchPage
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: responsive.wp(4),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: responsive.wp(4),
+                  ),
+                  height: responsive.hp(5),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        '¿Qué esta buscando?',
+                        style: TextStyle(
+                          color: Color(0xffB0BED1),
+                          fontFamily: 'PulpDisplay-Medium',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
-                    Spacer(),
-                    Icon(
-                      Icons.search,
-                      size: 26,
-                      color: Colors.black,
-                    ),
-                  ],
+                      Spacer(),
+                      Icon(
+                        Icons.search,
+                        size: 26,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
