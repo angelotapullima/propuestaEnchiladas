@@ -28,7 +28,7 @@ class CategoriasBloc {
     _cargandoCategoriasController.sink.add(false);
   }
 
-  void obtenerCategoriasEnchiladas() async {
+  void obtenerCategoriasEnchiladas2() async {
     _cargandoCategoriasController.sink.add(true);
     _categoriasEnchiladasController.sink.add(await categoriasDatabase.obtenerCategoriasEnchiladas());
     /* await categoriasApi.obtenerAmbos();
@@ -40,7 +40,7 @@ class CategoriasBloc {
     _cargandoCategoriasController.sink.add(false);
   }
 
-  void obtenerCategoriasLocalEnchiladas() async {
+  void obtenerCategoriasEnchiladas() async {
     _cargandoCategoriasController.sink.add(true);
     _categoriasEnchiladasController.sink.add(await categoriasDatabase.obtenerCategoriasLocalEnchiladas());
     /* await categoriasApi.obtenerAmbos();
@@ -52,12 +52,12 @@ class CategoriasBloc {
     _cargandoCategoriasController.sink.add(false);
   }
 
-  void obtenerCategoriasPorTipo(String tipo) async {
+  void obtenerCategoriasPorTipo2(String tipo) async {
     //tipo ==2 market
     //tipo ==3 cafe
 
     _cargandoCategoriasController.sink.add(true);
-    _categoriasPorTipoController.sink.add(await categoriasDatabase.obtenerCategoriasPorTipo(tipo));
+    _categoriasPorTipoController.sink.add(await categoriasDatabase.obtenerCategoriasLocalEnchiladas());
 
     /* _categoriasMarketController.sink.add(await categoriasApi.cargarCategorias());
 

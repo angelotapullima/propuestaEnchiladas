@@ -128,7 +128,7 @@ class PantallaBloc {
       } else if (pantalla.idPantalla == '3') {
         //puzzle
 
-        final listaPuzzle = await puzzleDatabase.obtenerPuzzle(); //puzzle.obtenerCategoriasTodos();
+       /*  final listaPuzzle = await puzzleDatabase.obtenerPuzzle(); //puzzle.obtenerCategoriasTodos();
 
         if (listaPuzzle.length > 10) {
           for (int x = 0; x < 10; x++) {
@@ -149,7 +149,7 @@ class PantallaBloc {
 
             listItemPantalla.add(item);
           }
-        }
+        } */
       } else {
         //resto
 

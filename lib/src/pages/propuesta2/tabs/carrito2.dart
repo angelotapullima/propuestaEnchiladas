@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/productos_model.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
@@ -22,7 +21,7 @@ class Carrito2 extends StatelessWidget {
         elevation: 0,
         title: Text(
           'Carrito',
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.grey[700],
             fontSize: 19,
@@ -72,7 +71,7 @@ class Carrito2 extends StatelessWidget {
                                       children: [
                                         Text(
                                           'SubTotal',
-                                          style: GoogleFonts.poppins(
+                                          style:TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.grey,
                                             fontSize: 16,
@@ -81,7 +80,7 @@ class Carrito2 extends StatelessWidget {
                                         Spacer(),
                                         Text(
                                           'S/.23.00',
-                                          style: GoogleFonts.poppins(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.grey,
                                             fontSize: 16,
@@ -101,7 +100,7 @@ class Carrito2 extends StatelessWidget {
                                       children: [
                                         Text(
                                           'Envío',
-                                          style: GoogleFonts.poppins(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.grey,
                                             fontSize: 16,
@@ -110,7 +109,7 @@ class Carrito2 extends StatelessWidget {
                                         Spacer(),
                                         Text(
                                           'S/.0.0',
-                                          style: GoogleFonts.poppins(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.grey,
                                             fontSize: 16,
@@ -130,7 +129,7 @@ class Carrito2 extends StatelessWidget {
                                       children: [
                                         Text(
                                           'Total',
-                                          style: GoogleFonts.poppins(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 18,
                                           ),
@@ -138,7 +137,7 @@ class Carrito2 extends StatelessWidget {
                                         Spacer(),
                                         Text(
                                           'S/.23.00',
-                                          style: GoogleFonts.poppins(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 18,
                                           ),
@@ -188,7 +187,7 @@ class Carrito2 extends StatelessWidget {
                                     children: [
                                       Text(
                                         '4 Productos agregados',
-                                        style: GoogleFonts.poppins(
+                                        style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           color: Colors.grey[700],
                                           fontSize: 13,
@@ -196,7 +195,7 @@ class Carrito2 extends StatelessWidget {
                                       ),
                                       Text(
                                         'S/23.00',
-                                        style: GoogleFonts.poppins(
+                                        style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 14,
                                         ),
@@ -206,7 +205,7 @@ class Carrito2 extends StatelessWidget {
                                   Spacer(),
                                   Text(
                                     'Pagar',
-                                    style: GoogleFonts.poppins(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black,
                                       fontSize: 13,
@@ -273,7 +272,7 @@ class Carrito2 extends StatelessWidget {
                                   children: [
                                     Text(
                                       '${snapshot.data[i].productoNombre.toLowerCase()}',
-                                      style: GoogleFonts.poppins(
+                                      style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 15,
@@ -281,7 +280,7 @@ class Carrito2 extends StatelessWidget {
                                     ),
                                     Text(
                                       'S/.${snapshot.data[i].productoPrecio}',
-                                      style: GoogleFonts.poppins(
+                                      style: TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,

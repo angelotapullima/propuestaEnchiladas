@@ -9,8 +9,9 @@ import 'package:propuesta_enchiladas/src/api/configuracion_api.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/categoria_model.dart';
 import 'package:propuesta_enchiladas/src/models/pantalla_model.dart';
-import 'package:propuesta_enchiladas/src/pages/propuesta2/detalle_categoria.dart';
+import 'package:propuesta_enchiladas/src/pages/propuesta1/detalle_categoria.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta2/tabs/categoria2.dart';
+import 'package:propuesta_enchiladas/src/pages/search.dart';
 import 'package:propuesta_enchiladas/src/utils/circle.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
 import 'package:propuesta_enchiladas/src/utils/sliver_header_delegate.dart';
@@ -178,19 +179,14 @@ class _Principal2State extends State<Principal2> {
                                                         children: List.generate(
                                                           cat.data.length,
                                                           (index) => Container(
-                                                            width: (_currentPageNotifier.value >= index - 0.5 &&
-                                                                    _currentPageNotifier.value < index + 0.5)
-                                                                ? 10
-                                                                : 5,
+                                                            width: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5) ? 10 : 5,
                                                             height: 5,
                                                             margin: EdgeInsets.symmetric(horizontal: 5),
                                                             decoration: BoxDecoration(
-                                                              borderRadius: (_currentPageNotifier.value >= index - 0.5 &&
-                                                                      _currentPageNotifier.value < index + 0.5)
+                                                              borderRadius: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5)
                                                                   ? BorderRadius.circular(8)
                                                                   : BorderRadius.circular(10),
-                                                              color: (_currentPageNotifier.value >= index - 0.5 &&
-                                                                      _currentPageNotifier.value < index + 0.5)
+                                                              color: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5)
                                                                   ? Colors.green
                                                                   : Colors.grey,
                                                               /*    shape: (_currentPageNotifier.value >= index - 0.5 &&
@@ -241,25 +237,27 @@ class _Principal2State extends State<Principal2> {
                                                   if (index == 0) {
                                                     return InkWell(
                                                       onTap: () {
-                                                        Navigator.of(context).push(PageRouteBuilder(
-                                                          pageBuilder: (context, animation, secondaryAnimation) {
-                                                            return Categoria2();
-                                                          },
-                                                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                                            var begin = Offset(0.0, 1.0);
-                                                            var end = Offset.zero;
-                                                            var curve = Curves.ease;
+                                                        Navigator.of(context).push(
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (context, animation, secondaryAnimation) {
+                                                              return Categoria2();
+                                                            },
+                                                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                              var begin = Offset(0.0, 1.0);
+                                                              var end = Offset.zero;
+                                                              var curve = Curves.ease;
 
-                                                            var tween = Tween(begin: begin, end: end).chain(
-                                                              CurveTween(curve: curve),
-                                                            );
+                                                              var tween = Tween(begin: begin, end: end).chain(
+                                                                CurveTween(curve: curve),
+                                                              );
 
-                                                            return SlideTransition(
-                                                              position: animation.drive(tween),
-                                                              child: child,
-                                                            );
-                                                          },
-                                                        ));
+                                                              return SlideTransition(
+                                                                position: animation.drive(tween),
+                                                                child: child,
+                                                              );
+                                                            },
+                                                          ),
+                                                        );
                                                       },
                                                       child: Container(
                                                         width: responsive.hp(9),
@@ -308,6 +306,7 @@ class _Principal2State extends State<Principal2> {
                                                           return Detallecategoria(
                                                             idCategoria: '${snapshot.data[index].idCategoria}',
                                                             categoriaNombre: '${snapshot.data[index].categoriaNombre}',
+                                                            categoriaIcono: '${snapshot.data[index].categoriaIcono}',
                                                           );
                                                         },
                                                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -338,8 +337,8 @@ class _Principal2State extends State<Principal2> {
                                                               '${snapshot.data[index].categoriaIcono}',
                                                               semanticsLabel: 'A shark?!',
                                                               //color:Colors.black,
-                                                              placeholderBuilder: (BuildContext context) => Container(
-                                                                  padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
+                                                              placeholderBuilder: (BuildContext context) =>
+                                                                  Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),
@@ -450,14 +449,6 @@ class _Principal2State extends State<Principal2> {
       tipo = 'categoria';
 
       boxfit = BoxFit.fill;
-    } else if (pantallaModel.idPantalla == '3') {
-      //puzzle
-      altoCard = 26.0;
-      anchoCard = 20;
-
-      boxfit = BoxFit.fill;
-
-      tipo = 'puzzle';
     } else {
       boxfit = BoxFit.fill;
       tipo = 'producto';
@@ -537,9 +528,7 @@ class _Principal2State extends State<Principal2> {
                                           ),
                                         ),
                                         Center(
-                                          child: (downloadProgress.progress != null)
-                                              ? Text('${(downloadProgress.progress * 100).toInt().toString()}%')
-                                              : Container(),
+                                          child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
                                         )
                                       ],
                                     ),
@@ -715,7 +704,13 @@ class _CustomHeaderPrincipal1State extends State<CustomHeaderPrincipal1> {
         maxHeight: responsive.ip(14) + kToolbarHeight,
         minHeight: responsive.ip(14) + kToolbarHeight,
         child: Container(
-          color: Color(0xE1F0EFEF),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+            ),
+          ),
           // color: Colors.red,
           child: SafeArea(
             bottom: false,
@@ -742,10 +737,17 @@ class _CustomHeaderPrincipal1State extends State<CustomHeaderPrincipal1> {
                           },
                         ),
                       ),
+                      SizedBox(
+                        width: responsive.wp(2),
+                      ),
+                      Text(
+                        'Hola, Nadia',
+                        style: TextStyle(color: Colors.white, fontSize: responsive.ip(2.4), fontWeight: FontWeight.w600),
+                      ),
                       Spacer(),
                       Container(
                         decoration: BoxDecoration(
-                          color: Color(0x30F3B440),
+                          color: Color(0x30F3EFE8),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         padding: EdgeInsets.symmetric(
@@ -754,43 +756,86 @@ class _CustomHeaderPrincipal1State extends State<CustomHeaderPrincipal1> {
                         ),
                         child: Icon(
                           Ionicons.ios_cart,
-                          color: Color(0xFF585D64),
+                          color: Colors.white,
                         ),
                       )
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                    left: responsive.wp(6),
+                    right:responsive.wp(10),
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        '" Lo tenemos todo, solo faltas tú "',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: responsive.ip(2.2),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
                   height: responsive.hp(1),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: responsive.wp(6),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  height: responsive.hp(4),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: responsive.wp(3),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) {
+                          return SearchPage();
+                        },
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          var begin = Offset(0.0, 1.0);
+                          var end = Offset.zero;
+                          var curve = Curves.ease;
+
+                          var tween = Tween(begin: begin, end: end).chain(
+                            CurveTween(curve: curve),
+                          );
+
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        },
                       ),
-                      Icon(
-                        Icons.search,
-                        color: Colors.grey,
-                      ),
-                      Expanded(
-                        child: Text(
-                          '¿Qué está buscando?',
-                          style: TextStyle(color: Colors.grey),
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: responsive.wp(6),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    height: responsive.hp(4),
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: responsive.wp(3),
                         ),
-                      )
-                    ],
+                        Icon(
+                          Icons.search,
+                          color: Colors.grey,
+                        ),
+                        Expanded(
+                          child: Text(
+                            '¿Qué está buscando?',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),

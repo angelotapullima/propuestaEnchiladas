@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta1/tabs/carrito1.dart';
@@ -13,6 +13,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 class Home1 extends StatefulWidget {
   const Home1({Key key}) : super(key: key);
 
+//933080841
   @override
   _Home1State createState() => _Home1State();
 }
@@ -48,9 +49,9 @@ class _Home1State extends State<Home1> {
                   stream: buttonBloc.selectPageStream,
                   builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                     return Container(
-                      padding: EdgeInsets.only(
+                      /* padding: EdgeInsets.only(
                         bottom: kBottomNavigationBarHeight * 1.5,
-                      ),
+                      ), */
                       child: IndexedStack(
                         index: snapshot.data,
                         children: pageList,
@@ -58,7 +59,7 @@ class _Home1State extends State<Home1> {
                     );
                   },
                 ),
-                Positioned(
+                /* Positioned(
                   bottom: 0,
                   left: 0,
                   right: 0,
@@ -162,50 +163,83 @@ class _Home1State extends State<Home1> {
                     ),
                   ),
                 )
-              ],
+               */],
             );
           }),
-      /* bottomNavigationBar: StreamBuilder(
+      bottomNavigationBar: StreamBuilder(
         stream: buttonBloc.selectPageStream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return SalomonBottomBar(
-            currentIndex: snapshot.data,
-            onTap: (i) {
-              buttonBloc.changePage(i);
-            },
+          return BottomNavigationBar(
+            backgroundColor: Colors.white,
+            elevation: 0.0,
+            selectedItemColor: Colors.green[400],
+            unselectedItemColor: Colors.red,
+            selectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
+            unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
+            type: BottomNavigationBarType.fixed,
             items: [
-              /// Home
-              SalomonBottomBarItem(
-                icon: FaIcon(FontAwesomeIcons.home),
-                title: Text("Inicio"),
-                selectedColor: Colors.blue,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                  size: responsive.ip(3),
+                ),
+                label: 'Principal',
               ),
-
-              /// Likes
-
-              /// Search
-              SalomonBottomBarItem(
-                icon: FaIcon(FontAwesomeIcons.route),
-                title: Text("Rutas"),
-                selectedColor: Colors.teal,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  FontAwesome5Solid.heart,
+                  size: responsive.ip(2.7),
+                ),
+                label: 'Favoritos',
               ),
-
-              /// Profile
-              SalomonBottomBarItem(
-                icon: FaIcon(FontAwesomeIcons.fire),
-                title: Text("Eventos"),
-                selectedColor: Colors.orange,
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.near_me,
+                    size: responsive.ip(3),
+                  ),
+                  label: 'Categorías'),
+              BottomNavigationBarItem(
+                icon: Stack(
+                  children: <Widget>[
+                    Icon(
+                      MaterialIcons.shopping_cart,
+                      size: responsive.ip(3),
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Container(
+                        child: Text(
+                          '4',
+                          style: TextStyle(color: Colors.white, fontSize: responsive.ip(1)),
+                        ),
+                        alignment: Alignment.center,
+                        width: responsive.ip(1.6),
+                        height: responsive.ip(1.6),
+                        decoration: BoxDecoration(color: Colors.green, shape: BoxShape.circle),
+                      ),
+                      //child: Icon(Icons.brightness_1, size: 8,color: Colors.redAccent,  )
+                    )
+                  ],
+                ),
+                label: 'Carrito',
               ),
-              SalomonBottomBarItem(
-                icon: FaIcon(FontAwesomeIcons.userAlt),
-                title: Text("Profile"),
-                selectedColor: Colors.teal,
-              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person,
+                  size: responsive.ip(3),
+                ),
+                label: 'Cuenta',
+              )
             ],
+            currentIndex: buttonBloc.page,
+            onTap: (index) => {
+              buttonBloc.changePage(index),
+            },
           );
         },
       ),
-     */
     );
   }
 }
+ */

@@ -1,16 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/productos_model.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
 
 class Detallecategoria extends StatefulWidget {
-  const Detallecategoria({Key key, @required this.idCategoria, @required this.categoriaNombre}) : super(key: key);
+  const Detallecategoria({
+    Key key,
+    @required this.idCategoria,
+    @required this.categoriaNombre,
+    @required this.categoriaIcono,
+  }) : super(key: key);
 
   final String idCategoria;
   final String categoriaNombre;
+  final String categoriaIcono;
 
   @override
   _DetallecategoriaState createState() => _DetallecategoriaState();
@@ -24,13 +30,14 @@ class _DetallecategoriaState extends State<Detallecategoria> {
 
     final responsive = Responsive.of(context);
     return Scaffold(
-      backgroundColor: Color(0xE1F8F5F5),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
           widget.categoriaNombre,
-          style: GoogleFonts.poppins(
+          style:TextStyle(
+            fontFamily: 'MADE-TOMMY',
             fontWeight: FontWeight.bold,
             color: Colors.grey[700],
             fontSize: 19,
@@ -43,13 +50,50 @@ class _DetallecategoriaState extends State<Detallecategoria> {
         builder: (BuildContext context, AsyncSnapshot<List<ProductosData>> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data.length > 0) {
-              return GridView.builder(
+              return ListView.builder(
                 padding: EdgeInsets.only(top: responsive.hp(1)),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1, crossAxisCount: 2, mainAxisSpacing: responsive.hp(2), crossAxisSpacing: responsive.wp(3)),
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, i) {
-                  return Transform.translate(
+                  return Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: responsive.wp(2),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              height: responsive.ip(4),
+                              width: responsive.ip(4),
+                              child: SvgPicture.network(
+                                widget.categoriaIcono,
+                                semanticsLabel: 'A shark?!',
+                                placeholderBuilder: (BuildContext context) => Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            SizedBox(
+                              width: responsive.wp(3),
+                            ),
+                            Expanded(
+                              child: Text('${snapshot.data[i].productoNombre}'),
+                            ),
+                            Container(
+                              width: responsive.wp(20),
+                              child: Text(
+                                'S/. ${snapshot.data[i].productoPrecio}',
+                                style: TextStyle(
+                                  fontSize: responsive.ip(1.8),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Divider()
+                      ],
+                    ),
+                  );
+                  /* return Transform.translate(
                     offset: Offset(00, i.isOdd ? 100 : 0),
                     child: Container(
                       width: double.infinity,
@@ -214,6 +258,7 @@ class _DetallecategoriaState extends State<Detallecategoria> {
                       ),
                     ),
                   );
+                */
                 },
               );
             } else {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/categoria_model.dart';
-import 'package:propuesta_enchiladas/src/pages/propuesta2/detalle_categoria.dart';
+import 'package:propuesta_enchiladas/src/pages/propuesta1/detalle_categoria.dart';
+import 'package:propuesta_enchiladas/src/pages/search.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
 
 class Categoria2 extends StatelessWidget {
@@ -23,44 +23,70 @@ class Categoria2 extends StatelessWidget {
         elevation: 0,
         title: Text(
           'Categorías',
-          style: GoogleFonts.poppins(
+          style: TextStyle(
+            fontFamily: 'MADE-TOMMY',
             fontWeight: FontWeight.bold,
             color: Colors.grey[700],
             fontSize: 19,
           ),
         ),
         bottom: PreferredSize(
-          child: Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: responsive.wp(4),
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: responsive.wp(4),
-            ),
-            height: responsive.hp(5),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.grey[100],
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              children: [
-                Text(
-                  '¿Qué esta buscando?',
-                  style: TextStyle(
-                    color: Color(0xffB0BED1),
-                    fontFamily: 'PulpDisplay-Medium',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return SearchPage();
+                  },
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    var begin = Offset(0.0, 1.0);
+                    var end = Offset.zero;
+                    var curve = Curves.ease;
+
+                    var tween = Tween(begin: begin, end: end).chain(
+                      CurveTween(curve: curve),
+                    );
+
+                    return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                    );
+                  },
+                ),
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: responsive.wp(4),
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: responsive.wp(4),
+              ),
+              height: responsive.hp(5),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    '¿Qué esta buscando?',
+                    style: TextStyle(
+                      fontFamily: 'MADE-TOMMY',
+                      color: Color(0xffB0BED1),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
                   ),
-                ),
-                Spacer(),
-                Icon(
-                  Icons.search,
-                  size: 26,
-                  color: Colors.black,
-                ),
-              ],
+                  Spacer(),
+                  Icon(
+                    Icons.search,
+                    size: 26,
+                    color: Colors.black,
+                  ),
+                ],
+              ),
             ),
           ),
           preferredSize: Size.fromHeight(50),
@@ -88,6 +114,7 @@ class Categoria2 extends StatelessWidget {
                                 return Detallecategoria(
                                   idCategoria: '${snapshot.data[i].idCategoria}',
                                   categoriaNombre: '${snapshot.data[i].categoriaNombre}',
+                                  categoriaIcono: '${snapshot.data[i].categoriaIcono}',
                                 );
                               },
                               transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -120,8 +147,7 @@ class Categoria2 extends StatelessWidget {
                                       child: SvgPicture.network(
                                         '${snapshot.data[i].categoriaIcono}',
                                         semanticsLabel: 'A shark?!',
-                                        placeholderBuilder: (BuildContext context) =>
-                                            Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
+                                        placeholderBuilder: (BuildContext context) => Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
                                         fit: BoxFit.cover,
                                       ),
                                     ),

@@ -14,7 +14,6 @@ class ConfiguracionApi {
 
   final prefs = new Preferences();
   final pantallaDatabase = PantallaDatabase();
-  final puzzleDatabase = PuzzleDatabase();
   final productoDatabase = ProductoDatabase();
 
   Future<bool> configuracion() async {
@@ -105,19 +104,7 @@ class ConfiguracionApi {
           await pantallaDatabase.insertarPantalla(pantalla);
         }
 
-        for (int y = 0; y < decodedData['result']['data']['puzzle'].length; y++) {
-          PuzzleDatum puzzle = PuzzleDatum();
-          puzzle.idImagen = decodedData['result']['data']['puzzle'][y]['id_imagen'];
-          puzzle.imagenRuta = decodedData['result']['data']['puzzle'][y]['imagen_ruta'];
-          puzzle.imagenTitulo = decodedData['result']['data']['puzzle'][y]['imagen_titulo'];
-
-          puzzle.imagenSubida = decodedData['result']['data']['puzzle'][y]['imagen_subida'];
-          puzzle.imagenInicio = decodedData['result']['data']['puzzle'][y]['imagen_inicio'];
-          puzzle.imagenFin = decodedData['result']['data']['puzzle'][y]['imagen_fin'];
-          puzzle.imagenEstado = decodedData['result']['data']['puzzle'][y]['imagen_estado'];
-
-          await puzzleDatabase.insertarPuzzle(puzzle);
-        }
+      
 
         /*  for (int t = 0;
             t < decodedData['result']['data']['adicionales'].length;

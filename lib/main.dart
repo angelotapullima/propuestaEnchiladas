@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/pages/home_principal.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta1/home_1.dart';
@@ -25,8 +24,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: 'splash',
+        
         theme: ThemeData(
-          textTheme: GoogleFonts.poppinsTextTheme(),
+          
+          fontFamily: 'MADE-TOMMY',
+           textTheme: const TextTheme(
+      bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+    ),
           // This is the theme of your application.
           //
           // Try running your application with "flutter run". You'll see the
@@ -40,7 +44,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/': (BuildContext context) => HomePage(),
-          'home1': (BuildContext context) => Home1(),
+          //'home1': (BuildContext context) => Home1(),
           'home2': (BuildContext context) => Home2(),
           'splash': (BuildContext context) => Splash(),
           /*  'detallePromocionesLocal': (BuildContext context) =>

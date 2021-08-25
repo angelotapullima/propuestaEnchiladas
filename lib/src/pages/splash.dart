@@ -40,7 +40,7 @@ class _SplashState extends State<Splash> {
 
       //final user = await usuarioDatabase.obtenerUsUario();
       // if (user.length > 0) {4
-      Navigator.pushReplacementNamed(context, '/');
+      Navigator.pushReplacementNamed(context, 'home2');
       /*  } else {
         Navigator.pushReplacementNamed(context, 'login');
       } */

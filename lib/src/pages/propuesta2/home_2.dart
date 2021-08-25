@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta2/tabs/carrito2.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta2/tabs/categoria2.dart';
@@ -24,6 +23,7 @@ class _Home2State extends State<Home2> {
   void initState() {
     pageList.add(Principal2());
     pageList.add(Favoritos2());
+    pageList.add(Categoria2());
     pageList.add(Carrito2());
     pageList.add(Usuario2());
     super.initState();
@@ -84,78 +84,133 @@ class _Home2State extends State<Home2> {
                     child: StreamBuilder(
                       stream: buttonBloc.selectPageStream,
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        return SalomonBottomBar(
-                          currentIndex: snapshot.data,
-                          unselectedItemColor: Colors.grey,
-                          onTap: (i) {
-                            buttonBloc.changePage(i);
-                          },
-                          items: [
-                            /// Home
-                            SalomonBottomBarItem(
-                              /*  Icon(AntDesign.stepforward),
-                                Icon(Ionicons.ios_search),
-                                Icon(FontAwesome.glass),
-                                Icon(MaterialIcons.ac_unit),
-                                Icon(FontAwesome5.address_book),
-                                Icon(FontAwesome5Solid.address_book),
-                                Icon(FontAwesome5Brands.$500px) */
-                              icon: Icon(Ionicons.ios_home),
-                              title: Text("Inicio"),
-                              selectedColor: Colors.red,
-                            ),
-
-                            /// Likes
-
-                            /// Search
-                            SalomonBottomBarItem(
-                              icon: Icon(FontAwesome5Solid.heart),
-                              title: Text("Favoritos"),
-                              selectedColor: Colors.red,
-                            ),
-
-                            /// Profile
-                            /*   SalomonBottomBarItem(
-                              icon: Icon(FontAwesome5Solid.box),
-                              title: Text("Categorías"),
-                              selectedColor: Colors.orange,
-                            ), */
-                            SalomonBottomBarItem(
-                              icon: Stack(
-                                children: [
-                                  Icon(MaterialIcons.shopping_cart),
-                                  Positioned(
-                                    right: 0,
-                                    top: 0,
-                                    child: Container(
-                                      height: responsive.ip(1.4),
-                                      width: responsive.ip(1.4),
-                                      decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius: BorderRadius.circular(100),
+                        return Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: responsive.wp(2),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  buttonBloc.changePage(0);
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.home,
+                                      size: responsive.ip(3),
+                                      color: (buttonBloc.page == 0) ? Colors.red : Colors.grey,
+                                    ),
+                                    Text(
+                                      'Inicio',
+                                      style: TextStyle(
+                                        fontSize: responsive.ip(1.6),
+                                        color: (buttonBloc.page == 0) ? Colors.red : Colors.grey,
                                       ),
-                                      child: Center(
-                                        child: Text(
-                                          '4',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 10,
-                                            color: Colors.white,
-                                          ),
-                                        ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  buttonBloc.changePage(1);
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      FontAwesome5Solid.heart,
+                                      size: responsive.ip(3),
+                                      color: (buttonBloc.page == 1) ? Colors.red : Colors.grey,
+                                    ),
+                                    Text(
+                                      'Favoritos',
+                                      style: TextStyle(
+                                        fontSize: responsive.ip(1.6),
+                                        color: (buttonBloc.page == 1) ? Colors.red : Colors.grey,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                             InkWell(
+                                onTap: () {
+                                  buttonBloc.changePage(2);
+                                },  
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.red.withOpacity(0.2),
+                                        spreadRadius: 1,
+                                        blurRadius: 8,
+                                        offset: Offset(0, 1), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: responsive.ip(3),
+                                    backgroundColor: Colors.red,
+                                    child: Center(
+                                      child: Icon(
+                                        MaterialIcons.grid_on,
+                                        color: Colors.white,
+                                        size: responsive.ip(2.5),
                                       ),
                                     ),
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
-                              title: Text("Carrito"),
-                              selectedColor: Colors.red,
-                            ),
-                            SalomonBottomBarItem(
-                              icon: Icon(FontAwesome5Solid.user),
-                              title: Text("Usuario"),
-                              selectedColor: Colors.red,
-                            ),
-                          ],
+                              InkWell(
+                                onTap: () {
+                                  buttonBloc.changePage(3);
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      MaterialIcons.shopping_cart,
+                                      size: responsive.ip(3),
+                                      color: (buttonBloc.page == 3) ? Colors.red : Colors.grey,
+                                    ),
+                                    Text(
+                                      'Carrito',
+                                      style: TextStyle(
+                                        fontSize: responsive.ip(1.6),
+                                        color: (buttonBloc.page == 3) ? Colors.red : Colors.grey,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  buttonBloc.changePage(4);
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.person,
+                                      size: responsive.ip(3),
+                                      color: (buttonBloc.page == 4) ? Colors.red : Colors.grey,
+                                    ),
+                                    Text(
+                                      'Usuario',
+                                      style: TextStyle(
+                                        fontSize: responsive.ip(1.6),
+                                        color: (buttonBloc.page == 4) ? Colors.red : Colors.grey,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -164,47 +219,6 @@ class _Home2State extends State<Home2> {
               ],
             );
           }),
-      /* bottomNavigationBar: StreamBuilder(
-        stream: buttonBloc.selectPageStream,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return SalomonBottomBar(
-            currentIndex: snapshot.data,
-            onTap: (i) {
-              buttonBloc.changePage(i);
-            },
-            items: [
-              /// Home
-              SalomonBottomBarItem(
-                icon: FaIcon(FontAwesomeIcons.home),
-                title: Text("Inicio"),
-                selectedColor: Colors.blue,
-              ),
-
-              /// Likes
-
-              /// Search
-              SalomonBottomBarItem(
-                icon: FaIcon(FontAwesomeIcons.route),
-                title: Text("Rutas"),
-                selectedColor: Colors.teal,
-              ),
-
-              /// Profile
-              SalomonBottomBarItem(
-                icon: FaIcon(FontAwesomeIcons.fire),
-                title: Text("Eventos"),
-                selectedColor: Colors.orange,
-              ),
-              SalomonBottomBarItem(
-                icon: FaIcon(FontAwesomeIcons.userAlt),
-                title: Text("Profile"),
-                selectedColor: Colors.teal,
-              ),
-            ],
-          );
-        },
-      ),
-     */
     );
   }
 }

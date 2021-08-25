@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+/* import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -37,25 +37,27 @@ class Categoria1 extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.of(context).push(PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      return SearchPage();
-                    },
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      var begin = Offset(0.0, 1.0);
-                      var end = Offset.zero;
-                      var curve = Curves.ease;
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return SearchPage();
+                      },
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        var begin = Offset(0.0, 1.0);
+                        var end = Offset.zero;
+                        var curve = Curves.ease;
 
-                      var tween = Tween(begin: begin, end: end).chain(
-                        CurveTween(curve: curve),
-                      );
+                        var tween = Tween(begin: begin, end: end).chain(
+                          CurveTween(curve: curve),
+                        );
 
-                      return SlideTransition(
-                        position: animation.drive(tween),
-                        child: child,
-                      );
-                    },
-                  ));
+                        return SlideTransition(
+                          position: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
 
                   //SearchPage
                 },
@@ -115,6 +117,7 @@ class Categoria1 extends StatelessWidget {
                           return Detallecategoria(
                             idCategoria: '${snapshot.data[i].idCategoria}',
                             categoriaNombre: '${snapshot.data[i].categoriaNombre}',
+                            categoriaIcono: '${snapshot.data[i].categoriaIcono}',
                           );
                         },
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -147,8 +150,7 @@ class Categoria1 extends StatelessWidget {
                                 child: SvgPicture.network(
                                   '${snapshot.data[i].categoriaIcono}',
                                   semanticsLabel: 'A shark?!',
-                                  placeholderBuilder: (BuildContext context) =>
-                                      Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
+                                  placeholderBuilder: (BuildContext context) => Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -233,3 +235,4 @@ class Categoria1 extends StatelessWidget {
     );
   }
 }
+ */

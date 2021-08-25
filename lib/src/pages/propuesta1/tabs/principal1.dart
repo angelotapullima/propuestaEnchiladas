@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+/* import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +10,7 @@ import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/categoria_model.dart';
 import 'package:propuesta_enchiladas/src/models/pantalla_model.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta1/detalle_categoria.dart';
+import 'package:propuesta_enchiladas/src/pages/search.dart';
 import 'package:propuesta_enchiladas/src/utils/circle.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
 import 'package:propuesta_enchiladas/src/utils/sliver_header_delegate.dart';
@@ -85,6 +86,7 @@ class _Principal1State extends State<Principal1> {
                                                           return Detallecategoria(
                                                             idCategoria: '${snapshot.data[index].idCategoria}',
                                                             categoriaNombre: '${snapshot.data[index].categoriaNombre}',
+                                                            categoriaIcono: '${snapshot.data[index].categoriaIcono}',
                                                           );
                                                         },
                                                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -126,8 +128,8 @@ class _Principal1State extends State<Principal1> {
                                                               '${snapshot.data[index].categoriaIcono}',
                                                               semanticsLabel: 'A shark?!',
                                                               //color:Colors.black,
-                                                              placeholderBuilder: (BuildContext context) => Container(
-                                                                  padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
+                                                              placeholderBuilder: (BuildContext context) =>
+                                                                  Container(padding: const EdgeInsets.all(30.0), child: const CircularProgressIndicator()),
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),
@@ -288,8 +290,7 @@ class _Principal1State extends State<Principal1> {
                                                             margin: EdgeInsets.symmetric(horizontal: 5),
                                                             decoration: BoxDecoration(
                                                               borderRadius: BorderRadius.circular(10),
-                                                              color: (_currentPageNotifier.value >= index - 0.5 &&
-                                                                      _currentPageNotifier.value < index + 0.5)
+                                                              color: (_currentPageNotifier.value >= index - 0.5 && _currentPageNotifier.value < index + 0.5)
                                                                   ? Colors.green
                                                                   : Colors.grey,
                                                             ),
@@ -617,9 +618,7 @@ class _Principal1State extends State<Principal1> {
                                               ),
                                             ),
                                             Center(
-                                              child: (downloadProgress.progress != null)
-                                                  ? Text('${(downloadProgress.progress * 100).toInt().toString()}%')
-                                                  : Container(),
+                                              child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
                                             )
                                           ],
                                         ),
@@ -764,9 +763,7 @@ class _Principal1State extends State<Principal1> {
                                                 ),
                                               ),
                                               Center(
-                                                child: (downloadProgress.progress != null)
-                                                    ? Text('${(downloadProgress.progress * 100).toInt().toString()}%')
-                                                    : Container(),
+                                                child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
                                               )
                                             ],
                                           ),
@@ -947,25 +944,50 @@ class _CustomHeaderPrincipal1State extends State<CustomHeaderPrincipal1> {
                         ),
                       ),
                       Spacer(),
-                      Container(
-                        height: responsive.hp(3),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.search,
-                              size: 26,
-                              color: Colors.black,
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation, secondaryAnimation) {
+                                return SearchPage();
+                              },
+                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                var begin = Offset(0.0, 1.0);
+                                var end = Offset.zero;
+                                var curve = Curves.ease;
+
+                                var tween = Tween(begin: begin, end: end).chain(
+                                  CurveTween(curve: curve),
+                                );
+
+                                return SlideTransition(
+                                  position: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
                             ),
-                            Text(
-                              '¿Qué esta buscando?',
-                              style: TextStyle(
-                                color: Color(0xffB0BED1),
-                                fontFamily: 'PulpDisplay-Medium',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
+                          );
+                        },
+                        child: Container(
+                          height: responsive.hp(3),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.search,
+                                size: 26,
+                                color: Colors.black,
                               ),
-                            )
-                          ],
+                              Text(
+                                '¿Qué esta buscando?',
+                                style: TextStyle(
+                                  color: Color(0xffB0BED1),
+                                  fontFamily: 'PulpDisplay-Medium',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -1001,3 +1023,4 @@ class _CustomHeaderPrincipal1State extends State<CustomHeaderPrincipal1> {
     );
   }
 }
+ */

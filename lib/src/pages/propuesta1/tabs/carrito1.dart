@@ -1,11 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
+/* import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/productos_model.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
 class Carrito1 extends StatelessWidget {
   const Carrito1({Key key}) : super(key: key);
@@ -364,3 +364,4 @@ class Carrito1 extends StatelessWidget {
     );
   }
 }
+ */

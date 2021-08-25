@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:propuesta_enchiladas/src/bloc/provider.dart';
 import 'package:propuesta_enchiladas/src/models/productos_model.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
@@ -74,36 +74,38 @@ class _SearchPageState extends State<SearchPage> {
                               Expanded(
                                 child: Container(
                                   color: Colors.white,
-                                  child: TextField(
-                                    controller: _controllerBusquedaProducto,
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                      hintText: '¿Qué esta buscando?',
-                                      border: InputBorder.none,
-                                      hintStyle: TextStyle(color: Colors.black45),
-                                      filled: false,
-                                      contentPadding: EdgeInsets.symmetric(
-                                        vertical: responsive.hp(0),
+                                  child: Center(
+                                    child: TextField(
+                                      controller: _controllerBusquedaProducto,
+                                      keyboardType: TextInputType.text,
+                                      decoration: InputDecoration(
+                                        hintText: '¿Qué esta buscando?',
+                                        border: InputBorder.none,
+                                        hintStyle: TextStyle(color: Colors.black45),
+                                        filled: false,
+                                        contentPadding: EdgeInsets.symmetric(
+                                          vertical: responsive.hp(.2),
+                                        ),
                                       ),
+                                      onChanged: (value) {
+                                        if (value.length >= 0 && value != ' ') {
+                                          igual++;
+                                          _currentPageNotifier.value = true;
+                                          productosBloc.obtenerProductoPorQueryDelivery('$value');
+                                          //agregarHistorial(context, value, 'pro');
+                                        }
+                                      },
+                                      /*  onSubmitted: (value) {
+                                        /*  setState(() {
+                                                expandFlag = false;
+                                              }); */
+                                        if (value.length >= 0 && value != ' ') {
+                                          igual++;
+                                          productosBloc.obtenerProductoPorQueryDelivery('$value');
+                                          //agregarHistorial(context, value, 'pro');
+                                        }
+                                      }, */
                                     ),
-                                    onChanged: (value) {
-                                      if (value.length >= 0 && value != ' ') {
-                                        igual++;
-                                        _currentPageNotifier.value = true;
-                                        productosBloc.obtenerProductoPorQueryDelivery('$value');
-                                        //agregarHistorial(context, value, 'pro');
-                                      }
-                                    },
-                                    /*  onSubmitted: (value) {
-                                      /*  setState(() {
-                                              expandFlag = false;
-                                            }); */
-                                      if (value.length >= 0 && value != ' ') {
-                                        igual++;
-                                        productosBloc.obtenerProductoPorQueryDelivery('$value');
-                                        //agregarHistorial(context, value, 'pro');
-                                      }
-                                    }, */
                                   ),
                                 ),
                               ),
@@ -149,113 +151,209 @@ class _SearchPageState extends State<SearchPage> {
                 builder: (BuildContext context, AsyncSnapshot<List<ProductosData>> snapshot) {
                   if (snapshot.hasData) {
                     if (snapshot.data.length > 0) {
-                      return GridView.builder(
-                          padding: EdgeInsets.zero,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 1,
-                            crossAxisCount: 2,
-                            mainAxisSpacing: responsive.hp(2),
-                            crossAxisSpacing: responsive.wp(0),
-                          ),
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (context, i) {
-                            return Transform.translate(
-                              offset: Offset(00, i.isOdd ? 100 : 0),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: responsive.wp(2),
-                                  vertical: responsive.hp(.5),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                      return ListView.builder(
+                        padding: EdgeInsets.only(top: responsive.hp(1)),
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, i) {
+                          return Container(
+                            child: Column(
+                              children: [
+                                Row(
                                   children: [
+                                    SizedBox(
+                                      width: responsive.wp(3),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        '${snapshot.data[i].productoNombre}',
+                                        style: TextStyle(
+                                          fontSize: responsive.ip(1.6),
+                                        ),
+                                      ),
+                                    ),
                                     Container(
-                                      height: responsive.hp(15),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10.0),
+                                      width: responsive.wp(20),
+                                      child: Text(
+                                        'S/. ${snapshot.data[i].productoPrecio}',
+                                        style: TextStyle(
+                                          fontSize: responsive.ip(1.8),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Divider()
+                              ],
+                            ),
+                          );
+                          /* return Transform.translate(
+                    offset: Offset(00, i.isOdd ? 100 : 0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      margin: EdgeInsets.only(
+                        right: responsive.wp(1.5),
+                        left: responsive.wp(1.5),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: <Widget>[
+                              Container(
+                                height: responsive.hp(14),
+                                width: double.infinity,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: CachedNetworkImage(
+                                    progressIndicatorBuilder: (_, url, downloadProgress) {
+                                      return Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
                                         child: Stack(
                                           children: [
-                                            CachedNetworkImage(
-                                              placeholder: (context, url) => Container(
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                child: Center(
-                                                  child: CupertinoActivityIndicator(),
-                                                ),
-                                              ),
-                                              errorWidget: (context, url, error) => Container(
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                child: Center(
-                                                  child: Icon(Icons.error),
-                                                ),
-                                              ),
-                                              imageUrl: '${snapshot.data[i].productoFoto}',
-                                              imageBuilder: (context, imageProvider) => Container(
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
+                                            Center(
+                                              child: CircularProgressIndicator(
+                                                value: downloadProgress.progress,
+                                                backgroundColor: Colors.green,
+                                                valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
                                               ),
                                             ),
-                                            Positioned(
-                                              top: 0,
-                                              right: 0,
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: responsive.wp(2),
-                                                  vertical: responsive.hp(.5),
-                                                ),
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.only(
-                                                      bottomLeft: Radius.circular(10),
-                                                    ),
-                                                    /* borderRadius: BorderRadius.only(
-                                                    bottomRight: Radius.circular(10),
-                                                  ), */
-                                                    color: Colors.blue),
-                                                child: Text(
-                                                  'Destacado',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 11,
-                                                  ),
-                                                ),
-                                              ),
+                                            Center(
+                                              child: (downloadProgress.progress != null)
+                                                  ? Text('${(downloadProgress.progress * 100).toInt().toString()}%')
+                                                  : Container(),
                                             )
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'S/.${snapshot.data[i].productoPrecio}',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.red,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
+                                      );
+                                    },
+                                    errorWidget: (context, url, error) => Image(image: AssetImage('assets/carga_fallida.jpg'), fit: BoxFit.cover),
+                                    imageUrl: '${snapshot.data[i].productoFoto}',
+                                    imageBuilder: (context, imageProvider) => Container(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: imageProvider,
+                                          fit: BoxFit.cover,
                                         ),
-                                      ],
-                                    ),
-                                    Text(
-                                      '${snapshot.data[i].productoNombre.toLowerCase()}',
-                                      style: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13,
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            );
-                          });
+                              Positioned(
+                                top: 5,
+                                left: 0,
+                                right: 0,
+                                /*  left: responsive.wp(1),
+                                          top: responsive.hp(.5), */
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: responsive.wp(3),
+                                        vertical: responsive.hp(.5),
+                                      ),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            bottomRight: Radius.circular(10),
+                                          ),
+                                          color: Colors.red),
+                                      child: Text(
+                                        'Nuevo',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: responsive.ip(1.5),
+                                        ),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.white),
+                                      child: Center(
+                                        child: Icon(
+                                          Ionicons.md_heart,
+                                          color: Colors.red,
+                                          size: 15,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: responsive.wp(2),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(
+                              right: responsive.wp(1.5),
+                              left: responsive.wp(1.5),
+                            ),
+                            height: responsive.hp(3),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'S/ ${snapshot.data[i].productoPrecio}',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontFamily: 'Aeonik',
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: responsive.wp(2),
+                                    vertical: responsive.hp(.5),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      /* borderRadius: BorderRadius.only(
+                                                bottomRight: Radius.circular(10),
+                                              ), */
+                                      color: Colors.orange),
+                                  child: Text(
+                                    'Destacado',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: responsive.ip(1.3),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              right: responsive.wp(1.5),
+                              left: responsive.wp(1.5),
+                            ),
+                            child: Text(
+                              '${snapshot.data[i].productoNombre.toLowerCase()}',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Aeonik',
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                */
+                        },
+                      );
                     } else {
                       return (igual == 0)
                           ? Center(
@@ -275,7 +373,7 @@ class _SearchPageState extends State<SearchPage> {
                                 Center(
                                   child: Text(
                                     'Producto no encontrado',
-                                    style: GoogleFonts.poppins(
+                                    style: TextStyle(
                                       fontSize: responsive.ip(1.9),
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -284,7 +382,7 @@ class _SearchPageState extends State<SearchPage> {
                                 Center(
                                   child: Text(
                                     'Intente búscar otro producto',
-                                    style: GoogleFonts.poppins(
+                                    style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -320,7 +418,7 @@ class _SearchPageState extends State<SearchPage> {
                                                       child: Text(
                                                         'Productos populares',
                                                         textAlign: TextAlign.center,
-                                                        style: GoogleFonts.poppins(
+                                                        style: TextStyle(
                                                           fontSize: 20,
                                                           fontWeight: FontWeight.w700,
                                                         ),
@@ -374,8 +472,7 @@ class _SearchPageState extends State<SearchPage> {
                                                                       ),
                                                                     );
                                                                   },
-                                                                  errorWidget: (context, url, error) =>
-                                                                      Image(image: AssetImage('assets/carga_fallida.jpg'), fit: BoxFit.cover),
+                                                                  errorWidget: (context, url, error) => Image(image: AssetImage('assets/carga_fallida.jpg'), fit: BoxFit.cover),
                                                                   imageUrl: '${snapshot.data[i].productoFoto}',
                                                                   imageBuilder: (context, imageProvider) => Container(
                                                                     decoration: BoxDecoration(
@@ -418,8 +515,7 @@ class _SearchPageState extends State<SearchPage> {
                                                                   Spacer(),
                                                                   Container(
                                                                     padding: EdgeInsets.all(5),
-                                                                    decoration:
-                                                                        BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.white),
+                                                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.white),
                                                                     child: Center(
                                                                       child: Icon(
                                                                         Ionicons.md_heart,
