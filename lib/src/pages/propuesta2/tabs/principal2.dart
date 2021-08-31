@@ -264,16 +264,9 @@ class _Principal2State extends State<Principal2> {
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.center,
                                                           children: [
-                                                            Container(
-                                                              margin: EdgeInsets.symmetric(
-                                                                horizontal: responsive.wp(4),
-                                                              ),
-                                                              height: responsive.hp(5.5),
-                                                              width: responsive.hp(5.8),
-                                                              decoration: BoxDecoration(
-                                                                borderRadius: BorderRadius.circular(100),
-                                                                color: Colors.red,
-                                                              ),
+                                                            CircleAvatar(
+                                                              backgroundColor:Colors.red,
+                                                              radius: responsive.ip(2.5),
                                                               child: Center(
                                                                 child: Icon(
                                                                   Ionicons.ios_alert,
@@ -455,216 +448,217 @@ class _Principal2State extends State<Principal2> {
     }
 
     return ListView.builder(
-        padding: EdgeInsets.only(
-          top: responsive.hp(1),
-        ),
-        physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: 2,
-        itemBuilder: (context, j) {
-          if (j == 0) {
-            return Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                '${pantallaModel.pantallaNombre}',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Aeonik',
-                  fontSize: 19,
-                ),
+      padding: EdgeInsets.only(
+        top: responsive.hp(1),
+      ),
+      physics: ClampingScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: 2,
+      itemBuilder: (context, j) {
+        if (j == 0) {
+          return Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              '${pantallaModel.pantallaNombre}',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Aeonik',
+                fontSize: 19,
               ),
-            );
-          }
-          return GridView.builder(
-            padding: EdgeInsets.zero,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: .9,
-              crossAxisCount: 2,
-              mainAxisSpacing: responsive.hp(1),
             ),
-            itemCount: (pantallaModel.items.length > 3) ? 4 : pantallaModel.items.length,
-            physics: ClampingScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, i) {
-              return GestureDetector(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  width: responsive.ip(anchoCard),
-                  //height: (tipo=='puzzle')?responsive.hp(20):responsive.ip(altoCard),
-                  margin: EdgeInsets.only(
-                    right: responsive.wp(1.5),
-                    left: responsive.wp(1.5),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                            width: double.infinity,
-                            height: (tipo == 'puzzle')
-                                ? responsive.hp(25)
-                                : (tipo == 'producto')
-                                    ? responsive.ip(altoCard) - responsive.ip(15)
-                                    : responsive.ip(altoCard) - responsive.ip(0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: CachedNetworkImage(
-                                progressIndicatorBuilder: (_, url, downloadProgress) {
-                                  return Container(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    child: Stack(
-                                      children: [
-                                        Center(
-                                          child: CircularProgressIndicator(
-                                            value: downloadProgress.progress,
-                                            backgroundColor: Colors.green,
-                                            valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
-                                          ),
+          );
+        }
+        return GridView.builder(
+          padding: EdgeInsets.zero,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: .9,
+            crossAxisCount: 2,
+            mainAxisSpacing: responsive.hp(1),
+          ),
+          itemCount: (pantallaModel.items.length > 3) ? 4 : pantallaModel.items.length,
+          physics: ClampingScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, i) {
+            return GestureDetector(
+              onTap: () {},
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                width: responsive.ip(anchoCard),
+                //height: (tipo=='puzzle')?responsive.hp(20):responsive.ip(altoCard),
+                margin: EdgeInsets.only(
+                  right: responsive.wp(1.5),
+                  left: responsive.wp(1.5),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          width: double.infinity,
+                          height: (tipo == 'puzzle')
+                              ? responsive.hp(25)
+                              : (tipo == 'producto')
+                                  ? responsive.ip(altoCard) - responsive.ip(15)
+                                  : responsive.ip(altoCard) - responsive.ip(0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: CachedNetworkImage(
+                              progressIndicatorBuilder: (_, url, downloadProgress) {
+                                return Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  child: Stack(
+                                    children: [
+                                      Center(
+                                        child: CircularProgressIndicator(
+                                          value: downloadProgress.progress,
+                                          backgroundColor: Colors.green,
+                                          valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
                                         ),
-                                        Center(
-                                          child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                },
-                                errorWidget: (context, url, error) => Image(image: AssetImage('assets/carga_fallida.jpg'), fit: BoxFit.cover),
-                                imageUrl: '${pantallaModel.items[i].fotoItem}',
-                                imageBuilder: (context, imageProvider) => Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: boxfit,
-                                    ),
+                                      ),
+                                      Center(
+                                        child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                              errorWidget: (context, url, error) => Image(image: AssetImage('assets/carga_fallida.jpg'), fit: BoxFit.cover),
+                              imageUrl: '${pantallaModel.items[i].fotoItem}',
+                              imageBuilder: (context, imageProvider) => Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: boxfit,
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          (tipo == 'producto')
-                              ? ('${pantallaModel.items[i].productoNuevo}' != '1')
-                                  ? Positioned(
-                                      top: 5,
-                                      left: 0,
-                                      right: 0,
-                                      /*  left: responsive.wp(1),
+                        ),
+                        (tipo == 'producto')
+                            ? ('${pantallaModel.items[i].productoNuevo}' != '1')
+                                ? Positioned(
+                                    top: 5,
+                                    left: 0,
+                                    right: 0,
+                                    /*  left: responsive.wp(1),
                                     top: responsive.hp(.5), */
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: responsive.wp(3),
-                                              vertical: responsive.hp(.5),
-                                            ),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                  bottomRight: Radius.circular(10),
-                                                ),
-                                                color: Colors.red),
-                                            child: Text(
-                                              'Nuevo',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: responsive.ip(1.5),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: responsive.wp(3),
+                                            vertical: responsive.hp(.5),
+                                          ),
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                bottomRight: Radius.circular(10),
                                               ),
+                                              color: Colors.red),
+                                          child: Text(
+                                            'Nuevo',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: responsive.ip(1.5),
                                             ),
                                           ),
-                                          Spacer(),
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.white),
-                                            child: Center(
-                                              child: Icon(
-                                                Ionicons.md_heart,
-                                                color: Colors.red,
-                                                size: 15,
-                                              ),
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.white),
+                                          child: Center(
+                                            child: Icon(
+                                              Ionicons.md_heart,
+                                              color: Colors.red,
+                                              size: 15,
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: responsive.wp(2),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  : Container()
-                              : Container(),
-                        ],
-                      ),
-                      (tipo == 'puzzle')
-                          ? Container()
-                          : Container(
-                              padding: EdgeInsets.only(
-                                right: responsive.wp(1.5),
-                                left: responsive.wp(1.5),
-                              ),
-                              height: responsive.hp(3),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'S/ 23',
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                      fontFamily: 'Aeonik',
-                                      fontSize: 17,
+                                        ),
+                                        SizedBox(
+                                          width: responsive.wp(2),
+                                        )
+                                      ],
                                     ),
+                                  )
+                                : Container()
+                            : Container(),
+                      ],
+                    ),
+                    (tipo == 'puzzle')
+                        ? Container()
+                        : Container(
+                            padding: EdgeInsets.only(
+                              right: responsive.wp(1.5),
+                              left: responsive.wp(1.5),
+                            ),
+                            height: responsive.hp(3),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'S/ 23',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontFamily: 'Aeonik',
+                                    fontSize: 17,
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: responsive.wp(2),
-                                      vertical: responsive.hp(.5),
-                                    ),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        /* borderRadius: BorderRadius.only(
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: responsive.wp(2),
+                                    vertical: responsive.hp(.5),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      /* borderRadius: BorderRadius.only(
                                           bottomRight: Radius.circular(10),
                                         ), */
-                                        color: Colors.orange),
-                                    child: Text(
-                                      'Destacado',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: responsive.ip(1.3),
-                                      ),
+                                      color: Colors.orange),
+                                  child: Text(
+                                    'Destacado',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: responsive.ip(1.3),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                      (tipo == 'puzzle')
-                          ? Container()
-                          : Padding(
-                              padding: EdgeInsets.only(
-                                right: responsive.wp(1.5),
-                                left: responsive.wp(1.5),
-                              ),
-                              child: Text(
-                                '${pantallaModel.items[i].nombreItem.toLowerCase()}',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Aeonik',
-                                  fontSize: 14,
                                 ),
+                              ],
+                            ),
+                          ),
+                    (tipo == 'puzzle')
+                        ? Container()
+                        : Padding(
+                            padding: EdgeInsets.only(
+                              right: responsive.wp(1.5),
+                              left: responsive.wp(1.5),
+                            ),
+                            child: Text(
+                              '${pantallaModel.items[i].nombreItem.toLowerCase()}',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Aeonik',
+                                fontSize: 14,
                               ),
                             ),
-                    ],
-                  ),
+                          ),
+                  ],
                 ),
-              );
-            },
-          );
-        });
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }
 
@@ -765,7 +759,7 @@ class _CustomHeaderPrincipal1State extends State<CustomHeaderPrincipal1> {
                 Container(
                   padding: EdgeInsets.only(
                     left: responsive.wp(6),
-                    right:responsive.wp(10),
+                    right: responsive.wp(10),
                   ),
                   child: Row(
                     children: [

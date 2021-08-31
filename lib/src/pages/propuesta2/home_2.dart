@@ -6,7 +6,6 @@ import 'package:propuesta_enchiladas/src/pages/propuesta2/tabs/favoritos2.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta2/tabs/principal2.dart';
 import 'package:propuesta_enchiladas/src/pages/propuesta2/tabs/usuario2.dart';
 import 'package:propuesta_enchiladas/src/utils/responsive.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class Home2 extends StatefulWidget {
@@ -62,7 +61,7 @@ class _Home2State extends State<Home2> {
                   left: 0,
                   right: 0,
                   child: Container(
-                    height: kBottomNavigationBarHeight * 1.5,
+                    height: kBottomNavigationBarHeight * responsive.hp(.18),
                     padding: EdgeInsets.only(
                       bottom: responsive.hp(3),
                     ),
@@ -107,7 +106,7 @@ class _Home2State extends State<Home2> {
                                     Text(
                                       'Inicio',
                                       style: TextStyle(
-                                        fontSize: responsive.ip(1.6),
+                                        fontSize: responsive.ip(1.5),
                                         color: (buttonBloc.page == 0) ? Colors.red : Colors.grey,
                                       ),
                                     )
@@ -129,7 +128,7 @@ class _Home2State extends State<Home2> {
                                     Text(
                                       'Favoritos',
                                       style: TextStyle(
-                                        fontSize: responsive.ip(1.6),
+                                        fontSize: responsive.ip(1.5),
                                         color: (buttonBloc.page == 1) ? Colors.red : Colors.grey,
                                       ),
                                     )
