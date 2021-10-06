@@ -24,13 +24,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: 'splash',
-        
         theme: ThemeData(
-          
           fontFamily: 'MADE-TOMMY',
-           textTheme: const TextTheme(
-      bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-    ),
+          textTheme: const TextTheme(
+            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          ),
           // This is the theme of your application.
           //
           // Try running your application with "flutter run". You'll see the

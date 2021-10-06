@@ -36,7 +36,11 @@ class Favoritos2 extends StatelessWidget {
               return GridView.builder(
                 padding: EdgeInsets.zero,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1, crossAxisCount: 2, mainAxisSpacing: responsive.hp(2), crossAxisSpacing: responsive.wp(3)),
+                  childAspectRatio: 1,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: responsive.hp(2),
+                  crossAxisSpacing: responsive.wp(3),
+                ),
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, i) {
                   return Transform.translate(
@@ -76,9 +80,7 @@ class Favoritos2 extends StatelessWidget {
                                               ),
                                             ),
                                             Center(
-                                              child: (downloadProgress.progress != null)
-                                                  ? Text('${(downloadProgress.progress * 100).toInt().toString()}%')
-                                                  : Container(),
+                                              child: (downloadProgress.progress != null) ? Text('${(downloadProgress.progress * 100).toInt().toString()}%') : Container(),
                                             )
                                           ],
                                         ),

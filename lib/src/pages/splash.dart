@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-import 'dart:ui';
-
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 import 'package:propuesta_enchiladas/src/api/categorias_api.dart';
 import 'package:propuesta_enchiladas/src/api/configuracion_api.dart';

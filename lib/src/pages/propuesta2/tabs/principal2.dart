@@ -209,17 +209,8 @@ class _Principal2State extends State<Principal2> {
                                       }
                                     },
                                   ),
-                                  /* Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 16),
-                                    child: Text(
-                                      'Categorías',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Aeonik',
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ), */
+                                  
+                                  
                                   SizedBox(
                                     height: responsive.hp(2),
                                   ),
